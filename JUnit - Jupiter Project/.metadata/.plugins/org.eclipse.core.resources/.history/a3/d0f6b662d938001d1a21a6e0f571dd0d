@@ -1,0 +1,20 @@
+package junit.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class PasswordComplyTest {
+
+	@Test
+	void testDoesPasswordComply() {
+		PasswordComply password = new PasswordComply("1234");
+		if(password.doesPasswordComply()) {
+			System.out.println("Password is valid!");
+		} else {
+			System.out.println("Password is Invalid!");
+		}
+		
+		fail("Not yet implemented");
+	}
+}

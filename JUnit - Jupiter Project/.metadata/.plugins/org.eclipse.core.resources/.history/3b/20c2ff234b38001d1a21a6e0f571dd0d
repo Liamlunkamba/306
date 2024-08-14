@@ -1,0 +1,41 @@
+package junit.test;
+
+public class PasswordComply {
+	
+	private final String  passwordString;
+	private boolean passwordComplies = false;
+	
+	PasswordComply (String verifyPassword) {
+		passwordString = verifyPassword;		
+	}
+
+	
+	public boolean verifypasswordlength() {
+		
+	}
+	
+	public boolean verifyAplhaNumeric() {
+		
+	}
+	
+	public boolean hasAllowedspecailCharacters() {
+		
+	}
+	
+	public boolean alreadyExist() {
+		
+	}
+	
+	public boolean cannotReUse() {
+		
+	}
+	
+	public boolean noSpecailCharacters() {
+		
+	}
+	
+	public boolean doesPasswordComply() {
+		
+		return passwordComplies;		
+	}
+}

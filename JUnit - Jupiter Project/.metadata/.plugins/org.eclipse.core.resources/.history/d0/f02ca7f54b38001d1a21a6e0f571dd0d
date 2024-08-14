@@ -1,0 +1,49 @@
+package junit.test;
+
+public class PasswordComply {
+	
+	private final String  passwordString;
+	private boolean passwordComplies = false;
+	private final int minPasswordLength = 8;
+	private final int maxPasswordLength = 12;
+	
+	PasswordComply (String verifyPassword) {
+		passwordString = verifyPassword;		
+	}
+
+	
+	public boolean verifyPasswordLength() {
+		
+		if(!passwordString.isEmpty()) {		
+			if(passwordString.length() > minPasswordLength && passwordString.length() < maxPasswordLength) {
+				return true;
+				}	
+		}
+		return false;
+	}
+	
+	public boolean verifyAplhaNumeric() {
+		
+	}
+	
+	public boolean hasAllowedspecailCharacters() {
+		
+	}
+	
+	public boolean alreadyExist() {
+		
+	}
+	
+	public boolean cannotReUse() {
+		
+	}
+	
+	public boolean noSpecailCharacters() {
+		
+	}
+	
+	public boolean doesPasswordComply() {
+		
+		return passwordComplies;		
+	}
+}

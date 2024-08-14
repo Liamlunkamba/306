@@ -1,0 +1,15 @@
+package junit.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class PasswordComplyTest {
+
+	@Test
+	void testDoesPasswordComply() {
+		PasswordComply password = new PasswordComply();
+		
+		fail("Not yet implemented");
+	}
+}

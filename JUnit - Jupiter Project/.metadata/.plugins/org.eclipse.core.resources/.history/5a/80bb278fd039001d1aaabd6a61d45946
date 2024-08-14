@@ -1,0 +1,100 @@
+package junit.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+class PasswordComplyUsingHooksTest {
+	
+	PasswordComply password;
+	static File myFileReader;
+	static Scanner myScannerRead;
+	
+	@BeforeAll
+	static void prepareLoadTestData() {
+		
+		try {
+			myFileReader = new File("C:\\Users\\sharmo1\\workspace_y2022\\JUnit - TestData\\PasswordFile.txt");
+	        myScannerRead = new Scanner(myFileReader);	        	       
+	    } catch (FileNotFoundException e) {
+	      System.out.println("An error occurred.");
+	      e.printStackTrace();
+	    }		
+	}
+	
+	@BeforeEach
+	void init() {
+		password = new PasswordComply("");
+	}
+	
+	@Test
+	@Tag("DB-Password")
+	@DisplayName("Check ALL DB Password are Valid...")
+	void testDoesPasswordComply() {
+		assumeTrue((myFileReader != null));
+		boolean expectedResult = true;	
+		while (myScannerRead.hasNextLine()) {
+			String passwordRead = myScannerRead.nextLine();
+			System.out.println("Password Read from File : " + passwordRead);
+        	password.setPassword(passwordRead);
+    		boolean actualResult = password.doesPasswordComply();
+    		assertAll(
+    				() -> assertEquals(expectedResult,actualResult, "Password conditions failed!")
+    				);
+        }
+	}	
+	
+	@AfterEach
+	void cleanUpAfterTest() {
+		myScannerRead.close();
+		System.out.println("Clean Up of all local resources...");		
+	}
+	
+	@AfterAll
+	static void cleanAll() {
+		// File Pointers, DB Logs, Application Logs, Metrics Data Etc..		
+		Runtime. getRuntime(). gc();
+		System.out.println("Clean up of Application Level DB data, Logs, resources etc.. done.");
+	}
+	
+	@Disabled
+	@Test
+	void cleanUpFiles() {
+		myFileReader.delete();
+		System.out.println("Deleting all config, password file created.");
+	}
+	
+	@Nested	
+	@Tag("Configuration-File-Check")
+	@DisplayName("Check ALL Config Fiels")
+	class COnfigFilesAvailable {
+		
+		@Test
+		@DisplayName("Config")
+		void checkALLConfigFiles() {
+			System.out.println("All Config files created...");
+		}
+		
+		@Test
+		@DisplayName("Config Entries Created...")
+		@RepeatedTest(2)
+		void checkALLConfigEntries() {
+			System.out.println("All Config entries valid...");
+		}
+	}
+	
+}

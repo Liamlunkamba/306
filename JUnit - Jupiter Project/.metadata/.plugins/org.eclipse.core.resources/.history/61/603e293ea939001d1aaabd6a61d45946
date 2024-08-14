@@ -1,0 +1,16 @@
+package junit.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+class PasswordComplyTest {
+
+	@Test
+	void testDoesPasswordComply() {
+		boolean expectedResult = true;
+		PasswordComply password = new PasswordComply("abc1234");
+		boolean actualResult = password.doesPasswordComply();
+		assertEquals(expectedResult,actualResult, "Password conditions failed!");
+		//fail("Not yet implemented");
+	}
+}

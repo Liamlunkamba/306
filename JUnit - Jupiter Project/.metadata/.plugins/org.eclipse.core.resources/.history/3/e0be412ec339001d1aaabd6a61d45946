@@ -1,0 +1,54 @@
+package junit.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class PasswordComplyUsingHooksTest {
+	
+	PasswordComply password;
+	
+	@BeforeAll
+	void prepareLoadTestData() {
+		
+	}
+	@BeforeEach
+	void init() {
+		password = new PasswordComply("abcd1234");
+	}
+	
+	@Test
+	void testDoesPasswordComply() {
+		boolean expectedResult = true;		
+		boolean actualResult = password.doesPasswordComply();
+		assertEquals(expectedResult,actualResult, "Password conditions failed!");
+	}
+	
+	@Test
+	void testDoesPasswordExist() {
+		assertThrows(java.sql.SQLException.class,() -> password.doesNotAlreadyExist(), "SQL Exception was thrown.");
+	}
+	
+	@AfterEach
+	void cleanUpAfterTest() {
+		System.out.println("Clean Up of all local resources...");		
+	}
+	
+	@AfterAll
+	void cleanAll() {
+		// File Pointers, DB Logs, Application Logs, Metrics Data Etc..
+		Runtime. getRuntime(). gc();
+		System.out.println("Clean up of Application Level DB data, Logs, resources etc.. done.");
+	}
+	
+/*	
+	@Test
+	void testEmptyPassword() {
+		assertThrows(NullPointerException.class,() -> password.doesNotAlreadyExist(), "Null Exception was thrown but received SQL Exception.");
+	}
+	*/
+}
